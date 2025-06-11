@@ -12,16 +12,16 @@ import java.util.Map;
 public class Servicos {
 
     private static final Map<Long, Produto> cadastro = new HashMap<>();
+    private static final Map<Long, Produto> guardados = new HashMap<>();
+    Produto produto;
 
-    public Produto cadastrar(Produto produto){
+        public Produto cadastrar(Produto produto){
         long proximoId = cadastro.keySet().size() + 1L;
         produto.setId(proximoId);
         cadastro.put(proximoId, produto);
         return produto;
-
         }
-
-    public Produto atualizar(Produto produto, long produtoId){
+        public Produto atualizar(Produto produto, Long produtoId){
         if(cadastro.containsKey(produtoId)){
         produto.setId(produtoId);
         cadastro.put(produtoId, produto);
@@ -29,21 +29,33 @@ public class Servicos {
             }
             return null;
         }
-        public Produto getById(long produtoId){
+        public String armazenar(){
+            guardados.putAll(cadastro);
+            guardados.get(cadastro.values());
+            cadastro.clear();
+            return "ITENS ENVIADOS PARA A LISTA GUARDADOS";
+        }
+        public String armazenarId(Long produtoId){
+            produto = cadastro.get(produtoId);
+            guardados.put(produtoId, produto);
+            cadastro.remove(produtoId);
+            return "ITEM ARMAZENADO NA LISTA GUARDADOS";
+        }
+        public List<Produto> armazenados(Produto produto){
+        return new ArrayList<>(guardados.values());
+        }
+        public Produto getById(Long produtoId){
             return cadastro.get(produtoId);
         }
         public List<Produto> getAll(){
             return new ArrayList<>(cadastro.values());
         }
-
-        public String delete(long produtoId){
+        public String delete(Long produtoId){
             cadastro.remove(produtoId);
             return "DELETED";
         }
-
-        public Map<Long, Produto> getCadastro() {
-        return cadastro;
-    }
-
+        public Map<Long, Produto> getGuardados(){
+            return guardados;
+        }
 }
 
