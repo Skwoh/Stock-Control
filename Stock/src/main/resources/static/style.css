@@ -1,0 +1,16 @@
+body{
+    background-color: #e0e0d1;
+    }
+h1{
+    text-align: center;
+}
+.botoes{
+      display: flex;
+        gap: 40px;
+    }
+.b1 {
+    background-color: #f5f5dc;
+    }
+.b2 {
+    background-color: #f5f5dc;
+    }
