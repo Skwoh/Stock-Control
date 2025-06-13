@@ -5,6 +5,7 @@ import com.test.Stock.Services.Servicos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -19,29 +20,38 @@ public class API {
     private Servicos servicos;
 
     //METODOS POST
-    @PostMapping
+    @PostMapping("/postar")
     @ResponseBody
     public Produto postar(@RequestBody Produto cadastrar){
         return servicos.cadastrar(cadastrar);
     }
 
     //METODOS GET
-    @GetMapping
+
+    @GetMapping("/cadastro")
+    public String paginaCadastro(){
+        return "/cadastro";
+    }
+
+    @GetMapping("/listaCadastro")
     @ResponseBody
-    public List<Produto> getAll(){
+    public List<Produto> getAll(@RequestBody Produto produto){
         return servicos.getAll();
     }
+
     @GetMapping("/ID/{produtoId}")
     @ResponseBody
     public Produto porId(@PathVariable("produtoId") Long produtoId,
                          @RequestBody Produto produto){
         return servicos.getById(produtoId);
     }
+
     @GetMapping("/guardados")
     @ResponseBody
     public List<Produto> armazenados(Produto produtoId){
         return servicos.armazenados(produtoId);
     }
+
     //METODOS PUT
     @PutMapping("/{produtoId}")
     @ResponseBody

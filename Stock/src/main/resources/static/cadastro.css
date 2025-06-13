@@ -1,0 +1,26 @@
+body{
+    padding: 20px;
+    }
+
+.pagina{
+    display: flex;
+    gap: 40px;
+    }
+
+.botoes {
+    display: flex;
+    gap: 40px;
+    }
+
+.cadastro input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    }
+
+.listaCadastro{
+    border: 1px solid #ccc;
+          padding: 10px;
+          width: 300px;
+    }
+
